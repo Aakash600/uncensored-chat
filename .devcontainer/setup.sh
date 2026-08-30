@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euxo pipefail
-export HOME=/home/codespace
+export HOME="${HOME:-/root}"
 export PATH="$HOME/.local/bin:$PATH"
 
-# Python tooling (bare ubuntu-24.04 base)
+# Python tooling (bare ubuntu-24.04 base, vscode user has sudo)
 sudo apt-get update -qq
 sudo apt-get install -y -qq python3 python3-pip python3-venv openssl curl 2>&1 | tail -2
 
