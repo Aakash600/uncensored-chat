@@ -1,25 +1,29 @@
 # Uncensored Local LLM Chat (Codespace)
 
-ChatGPT-style UI (**Open WebUI**) + genuinely uncensored GGUF (**Gemma-3-4B-abliterated**), all local, no API, no keys, free.
+ChatGPT-style UI (**Open WebUI**) + genuinely uncensored GGUF (**Gemma-3-4B-abliterated**), all local in your Codespace. No API, no keys, free, no provider filters.
 
 ## Stack
 - `llama-server` (prebuilt llama.cpp) → `:8090` — runs the abliterated GGUF
 - `open-webui` → `:8080` — ChatGPT-style web UI, wired to llama-server
 
-## Setup (already auto-runs on Codespace create)
-`.devcontainer/setup.sh` installs llama.cpp + Open WebUI.
+## Model
+- `mradermacher/gemma3-4b-it-abliterated-GGUF` `Q4_K_M` (~2.5 GB)
+- Uncensored via **abliteration** (refusal layer removed). Local inference only — nothing leaves the machine.
+- Measured on the 4-core/16GB codespace: **~12 tok/s** (4 threads). Prompt ~17 t/s.
+
+## Setup (auto on codespace create)
+`.devcontainer/setup.sh` — needs **ubuntu-24.04 base** (glibc 2.39; the prebuilt llama.cpp binary won't run on the older universal 20.04 image). Installs llama.cpp + Open WebUI (`--break-system-packages`, PEP 668).
 
 ## Run
 ```bash
-bash download-model.sh   # once: pulls the ~2.6GB abliterated GGUF into ~/models
-bash run.sh              # starts llama-server (:8090) + open-webui (:8080)
+bash download-model.sh   # once: pull the ~2.5GB GGUF into ~/models
+bash start-server.sh     # llama-server :8090 (4 threads)
+bash start-webui.sh      # open-webui :8080  -> OPENAI_API_BASE_URL=http://127.0.0.1:8090/v1
 ```
+Then open forwarded `localhost:8080`. First visit = create local admin account (stored in codespace only), select model `gemma3-4b-abliterated`.
 
-Then open the forwarded `localhost:8080`. First login = create a local admin account (stored only in the codespace).
-
-## Model
-- Model: `mradermacher/gemma3-4b-it-abliterated-GGUF`, `Q4_K_M` (~2.6 GB)
-- Uncensored via abliteration (no refusal layer), local-only inference → no prompts leave the machine, no provider filtering.
-- CPU fast on 4-core codespace: ~10+ tok/s.
-
-Swap model: edit `MODEL` in `run.sh` + repo/filename in `download-model.sh` to any abliterated GGUF that fits 16GB (e.g. Qwen-7B-abliterated Q4 ~4.4GB, Llama-3.1-8B Q5 ~5.7GB).
+## Dev notes / gotchas
+- Port forward persists as a background process: `gh codespace ports forward <name> 8080:8080`.
+- Codespace **rebuild wipes /home** — rerun setup after rebuild.
+- `HF_HOME=/root/.hf` error in webui log is harmless (embedded RAG embedder only); chat unaffected.
+- Swap model: edit `MODEL` in `start-server.sh` + repo/filename in `download-model.sh` to another abliterated GGUF that fits 16GB.

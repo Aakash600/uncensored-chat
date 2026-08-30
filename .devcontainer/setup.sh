@@ -14,10 +14,10 @@ cd "$HOME/llama.cpp"
 curl -fsSL -o llama.tar.gz \
   "https://github.com/ggml-org/llama.cpp/releases/download/b${LLAMA_TAG}/llama-b${LLAMA_TAG}-bin-ubuntu-x64.tar.gz"
 tar xzf llama.tar.gz && rm llama.tar.gz
-for b in llama-server llama-cli llama-bench; do ln -sf llama-b${LLAMA_TAG}/\$b ./\$b; done
-echo 'export PATH="$HOME/llama.cpp:$PATH"' >> "$HOME/.bashrc"
+for b in llama-server llama-cli llama-bench; do ln -sf llama-b${LLAMA_TAG}/${b} ./${b}; done
+echo 'export PATH="$HOME/llama.cpp/llama-b10549:$PATH"' >> "$HOME/.bashrc"
 
-# Open WebUI + HF tooling (user site-packages)
-python3 -m pip install --user --no-cache-dir open-webui huggingface_hub hf_transfer 2>&1 | tail -2
+# Open WebUI + HF tooling (user site-packages; PEP 668 needs break-system-packages)
+python3 -m pip install --user --break-system-packages --no-cache-dir open-webui huggingface_hub hf_transfer 2>&1 | tail -2
 
 echo "SETUP_DONE"

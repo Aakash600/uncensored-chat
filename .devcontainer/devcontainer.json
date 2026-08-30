@@ -5,7 +5,7 @@
     "ghcr.io/devcontainers/features/sshd:1": {}
   },
   "containerEnv": {
-    "HF_HOME": "/root/.hf"
+    "HF_HOME": "/home/vscode/.hf"
   },
   "postCreateCommand": "bash .devcontainer/setup.sh",
   "forwardPorts": [8080, 8090]
