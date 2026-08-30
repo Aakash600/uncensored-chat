@@ -1,0 +1,9 @@
+{
+  "name": "uncensored-chat",
+  "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+  "containerEnv": {
+    "HF_HOME": "/workspaces/uncensored-chat/.hf"
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "forwardPorts": [8080, 8090]
+}
