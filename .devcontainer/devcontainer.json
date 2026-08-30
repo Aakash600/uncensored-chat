@@ -1,8 +1,8 @@
 {
   "name": "uncensored-chat",
-  "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
   "containerEnv": {
-    "HF_HOME": "/workspaces/uncensored-chat/.hf"
+    "HF_HOME": "/home/codespace/.hf"
   },
   "postCreateCommand": "bash .devcontainer/setup.sh",
   "forwardPorts": [8080, 8090]

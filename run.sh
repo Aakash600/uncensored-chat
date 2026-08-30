@@ -3,9 +3,9 @@
 # llama-server :8090  (GGUF backend)   +  Open WebUI :8080  (ChatGPT-style UI)
 set -euo pipefail
 export HOME=/home/codespace
-export PATH="$HOME/llama.cpp:$HOME/.local/bin:$PATH"
+export PATH="$HOME/llama.cpp/llama-b10549:$HOME/.local/bin:$PATH"
 MODEL_DIR="$HOME/models"
-MODEL="$MODEL_DIR/gemma-3-4b-it-abliterated.Q4_K_M.gguf"
+MODEL="$MODEL_DIR/gemma3-4b-it-abliterated.Q4_K_M.gguf"
 CTX=65536   # >=64K required by Open WebUI
 
 # 1) server
