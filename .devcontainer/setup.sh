@@ -8,7 +8,7 @@ sudo apt-get update -qq
 sudo apt-get install -y -qq python3 python3-pip python3-venv openssl curl 2>&1 | tail -2
 
 # llama.cpp prebuilt (matches glibc 2.39 / Ubuntu 24.04)
-LLAMA_TAG=b10549
+LLAMA_TAG=10549
 mkdir -p "$HOME/llama.cpp"
 cd "$HOME/llama.cpp"
 curl -fsSL -o llama.tar.gz \
