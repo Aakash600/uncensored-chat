@@ -11,8 +11,8 @@ export WEB_SEARCH_ENGINE=duckduckgo
 export WEB_SEARCH_RESULT_COUNT=5
 export ENABLE_WEB_SEARCH_CONFIRMATION=false
 
-# llama-server backend
-export OPENAI_API_BASE_URL=http://127.0.0.1:8090/v1
+# llama-server backend (through proxy: both models on one endpoint)
+export OPENAI_API_BASE_URL=http://127.0.0.1:8085/v1
 export OPENAI_API_KEY=local
 
 pkill -f open-webui 2>/dev/null; sleep 2
